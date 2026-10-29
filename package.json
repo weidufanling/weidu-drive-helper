@@ -1,0 +1,15 @@
+{
+  "name": "weidu-drive-helper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local drive inventory, exact-duplicate review and verified organised copies.",
+  "scripts": {
+    "test": "node --test *.test.mjs",
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@noble/hashes": "^2.4.0",
+    "esbuild": "^0.28.2"
+  }
+}

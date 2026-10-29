@@ -1,0 +1,9 @@
+{
+  "review_date": "2026-10-29",
+  "checks": {
+    "existing_tests_passed": 74,
+    "fresh_checkout_output_directories_fixed": true,
+    "rebuilt_application_matches_live_bytes": true
+  },
+  "scope": "Source packaging and reproducibility. No new real-person or physical-device study was performed."
+}

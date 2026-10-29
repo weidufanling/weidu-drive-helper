@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A free local tool to inspect folders, review matching files and create an organised, verified copy. Your files stay on your device.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' blob:; worker-src blob:; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Drive Helper · Weidu Fanling</title>
+<style>/*__CSS__*/</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the helper</a>
+<header><a class="brand" href="https://weidufanling.au/" rel="noreferrer">Weidu Fanling <span>未读凡灵</span></a><a href="https://weidufanling.au/helping-each-other/" rel="noreferrer">Free helpers ↗</a></header>
+<main id="main">
+<section class="intro">
+<div><p class="eyebrow">A LITTLE ORDER, AT YOUR PACE</p><h1>Make sense<br>of your drives.</h1><p class="lead">See what you have. Find matching files. Make an organised copy you can trust.</p><p class="privacy"><span aria-hidden="true">●</span> Runs on this device · Files stay local · No account</p></div>
+<div class="intro-aside"><svg viewBox="0 0 220 155" role="img" aria-label="Two folders brought together into one organised collection"><path d="M20 28h48l12 14h66v52H20z" fill="#d8e3d6" stroke="#607b67" stroke-width="2"/><path d="M59 64h48l12 14h76v58H59z" fill="#efc67c" stroke="#805614" stroke-width="2"/><path d="m85 107 13 13 28-29" fill="none" stroke="#102331" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M169 23v25m-12-12h24" fill="none" stroke="#607b67" stroke-width="2"/></svg><p>Your originals stay where they are.<br>You review the plan before copying.</p></div>
+</section>
+<nav class="steps" aria-label="Your progress"><button data-step="1" aria-current="step"><span>1</span> Choose folders</button><button data-step="2" disabled><span>2</span> Check matches</button><button data-step="3" disabled><span>3</span> Review & copy</button></nav>
+<div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+<div id="operation" class="operation" hidden><div class="operation-head"><strong id="operation-title"></strong><button id="stop" class="quiet">Stop</button></div><progress id="progress" max="100"></progress><p id="progress-detail"></p></div>
+
+<section id="step-1" class="panel" aria-labelledby="choose-title">
+<div class="section-head"><div><p class="eyebrow">START WITH WHAT YOU WANT TO UNDERSTAND</p><h2 id="choose-title">Choose a folder or drive.</h2></div><span class="pill">First version · 0.1.0</span></div>
+<p>Choose ordinary folders of documents, photos, videos or music. You can add folders from several drives and give each a name you recognise.</p>
+<div class="actions"><button id="add-folder" class="primary">Add a folder</button><button id="add-files">Choose individual files</button><button id="example" class="text-button">Try an example first →</button></div>
+<input id="folder-input" type="file" webkitdirectory multiple hidden><input id="file-input" type="file" multiple hidden>
+<p id="capability" class="small"></p><div id="sources" class="sources"></div>
+<div class="start-row"><button id="scan" class="primary" disabled>Scan chosen folders →</button><button id="clear" class="quiet" hidden>Clear selection</button></div>
+<details class="guide"><summary>What this first version includes</summary><p>It inspects selected ordinary files and compares their contents locally. It can create checked copies in browsers that support folder saving, including recent desktop Chrome and Edge.</p><p>App libraries, system folders and backup images are left in place. This version does not open Windows backup images or recover deleted files. Choose readable folders on working drives.</p><p>The page sends no filenames or file contents to Weidu. There are no analytics or external services in the helper. Your selection lasts for this tab; save a report before closing it.</p></details>
+</section>
+
+<section id="step-2" class="panel" aria-labelledby="matches-title" hidden>
+<div class="section-head"><div><p class="eyebrow">UNDERSTAND BEFORE CHANGING ANYTHING</p><h2 id="matches-title">See what is here.</h2></div><button class="quiet" data-back="1">Edit folders</button></div>
+<div id="stats" class="stats"></div>
+<div class="check-callout"><div><h3>Which files have the same contents?</h3><p>Matching names are only a clue. This check reads every selected file all the way through, ready for a checked copy. Large collections can take time.</p></div><button id="find-duplicates" class="primary">Check for identical files</button></div>
+<div id="duplicate-summary"></div><div id="duplicates"></div><div id="duplicate-pager" class="pager" hidden><button id="duplicate-previous">Previous groups</button><span id="duplicate-page"></span><button id="duplicate-next">Next groups</button></div>
+<details id="inventory" class="inventory" open><summary>Browse the selected files</summary><div class="filter-row"><label>Find a file<input id="file-search" type="search" placeholder="Name or folder"></label><label>Collection<select id="source-filter"><option value="">All collections</option></select></label></div><p id="file-count" class="small"></p><div class="table-scroll"><table><thead><tr><th>Collection</th><th>Folder / file</th><th>Size</th><th>Contents check</th></tr></thead><tbody id="file-rows"></tbody></table></div><div class="pager"><button id="file-previous">Previous files</button><span id="file-page"></span><button id="file-next">Next files</button></div></details>
+<details id="scan-issues" class="guide" hidden><summary id="scan-issues-title">Skipped or unavailable items</summary><div id="scan-issues-list"></div></details>
+<div class="actions bottom"><button id="review-plan" class="primary">Review an organised copy →</button><button id="download-scan">Save scan report</button></div>
+</section>
+
+<section id="step-3" class="panel" aria-labelledby="plan-title" hidden>
+<div class="section-head"><div><p class="eyebrow">YOUR CHOICES, MADE VISIBLE</p><h2 id="plan-title">Review the new collection.</h2></div><button class="quiet" data-back="2">Back to matches</button></div>
+<label class="layout-label">How should the new copy be arranged?<select id="layout"><option value="keep">Keep each collection’s folder layout</option><option value="collections">Group recognisable collections and loose files</option></select></label>
+<p class="small">Grouping keeps known music, photo and document folders together. Related projects and saved pages keep their layout.</p>
+<div id="plan-summary" class="plan-summary"></div><div id="plan-warnings"></div>
+<label>Find a planned file<input id="plan-search" type="search" placeholder="Original name or new location"></label><div class="table-scroll"><table><thead><tr><th>Original location</th><th>New location, inside the new folder</th><th>Size</th></tr></thead><tbody id="plan-rows"></tbody></table></div><div class="pager"><button id="plan-previous">Previous files</button><span id="plan-page"></span><button id="plan-next">Next files</button></div>
+<div class="copy-area"><h3>Choose where to put it.</h3><p>Copies go into one new folder. Every saved file is read back and checked. Your originals remain available.</p><button id="choose-destination">Choose a destination folder</button><p id="destination" class="destination">No destination chosen.</p><p id="job-name" class="small"></p><p id="save-capability" class="small"></p>
+<details class="guide"><summary>Read before making the copy</summary><p>Keep this tab open until copying and checking finish. Make sure the destination has enough free space for the total shown above, plus room for temporary writes. Browser storage estimates cannot measure the free space on your chosen external drive.</p><p>These are copies of file contents and folder names. Original modification dates are listed in the report; copied files may show today’s date. Computer permissions, Finder tags and other extra file information are not preserved. Empty folders are not included. Keep existing backups and app libraries in their original form.</p><p>If you stop or a drive disconnects, COPY STATUS.txt in the new folder says INCOMPLETE. Completed files remain in it with a report. This first version starts a fresh folder when you try again; it does not resume an old job.</p></details>
+<label class="review-check"><input id="reviewed" type="checkbox" disabled><span>I have reviewed this plan and any skipped items. I want these files copied into the new folder shown above.</span></label><button id="copy" class="primary" disabled>Create the checked copy</button></div>
+<div class="actions bottom"><button id="download-plan">Save this plan</button><button id="download-csv">Save file list as CSV</button></div>
+</section>
+
+<section id="result" class="panel result" hidden aria-labelledby="result-title"><p class="eyebrow" id="result-eyebrow"></p><h2 id="result-title"></h2><p id="result-description"></p><div id="result-details"></div><div class="actions"><button id="download-result">Save copy report</button><button id="back-plan">Back to the plan</button></div></section>
+<footer><p>A free helper from <a href="https://weidufanling.au/" rel="noreferrer">Weidu Fanling</a>. Built for a useful first step, at your pace.</p><p>Files stay on this device. <button id="privacy-details" class="text-button">Privacy & limits</button> · <button id="third-party" class="text-button">Open-source acknowledgements</button></p></footer>
+</main>
+<dialog id="info-dialog"><button id="dialog-close" class="dialog-close" aria-label="Close">×</button><h2 id="dialog-title"></h2><div id="dialog-body"></div></dialog>
+<script>/*__APP__*/</script>
+</body></html>
