@@ -9,3 +9,9 @@ dist/
 verification/
 static/
 checks/
+
+# Security baseline: local credentials and private scan material
+!.env.example
+security-reports/
+__pycache__/
+*.py[cod]
