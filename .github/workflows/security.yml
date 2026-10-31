@@ -1,0 +1,37 @@
+name: Security and source checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  secret-checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out the complete history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install the verified secret scanner
+        run: bash scripts/security/install-gitleaks-linux.sh "$RUNNER_TEMP/weidu-gitleaks"
+      - name: Check fetched history and current directory
+        run: bash scripts/security/check-secrets.sh "$RUNNER_TEMP/weidu-gitleaks/gitleaks"
+  source-checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check source without installing packages
+        run: |
+          python3 scripts/security/test_release_gate.py
+          python3 scripts/security/release_gate.py .
+          node --test engine.test.mjs
+          python3 scripts/security/test_dependency_audit.py
+          python3 scripts/security/dependency_audit.py --root .
